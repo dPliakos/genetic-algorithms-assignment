@@ -2,7 +2,11 @@ import pygad
 import numpy
 import random
 
-print("🐍")
+def awesomeness():
+  for _ in range(80):
+    print("🦄", end="")
+  print("")
+
 inputFile = "./in.txt"
 
 # Read file
@@ -26,6 +30,8 @@ with open(inputFile, 'r') as data:
       cables_availability.append(int(line[1]))
       pair = data.readline()
 
+
+awesomeness()
 # Create genotype
 print("distance: ", distance)
 print("dimensions: ", dimensions)
@@ -154,3 +160,5 @@ for i in range(len(solution)):
       covered_length += solution[i] * dimensions[i]
 
 print("covered_length: ", covered_length)
+
+awesomeness()
