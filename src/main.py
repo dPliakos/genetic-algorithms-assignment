@@ -42,10 +42,6 @@ def fitness_func(solution, solution_idx):
     for i in range(len(solution)):
       covered_length += solution[i] * dimensions[i]
 
-    # covered_length is important
-    #  covered_length
-
-
     # difference
     length_difference = numpy.abs(numpy.int32(distance) - covered_length)
 
@@ -75,8 +71,6 @@ def fitness_func(solution, solution_idx):
     else:
       return original_fitness
 
-    # return 1.0 / x
-
 def callback_gen(ga_instance):
     sol = ga_instance.best_solution()
     f = sol[1]
@@ -96,20 +90,35 @@ def callback_gen(ga_instance):
     nodes = nodes - 1
     print("Generation : ", ga_instance.generations_completed, " - Fitness:", f, " - sol: ", solution, " - Distance: ", covered_length, " - nodes:", nodes)
 
+def on_parents(ga_instance, selected_parents):
+    lala = []
+    for parent in selected_parents:
+      lala.append(str(parent))
+
+    all_par = set(lala)
+    # print("parents: ", len(all_par), " - par: ", str(all_par))
+    print("parent type: ", len(all_par), " - parents:", len(selected_parents), end=" - ")
+
+
+
 fitness_function = fitness_func
 
 num_generations = 12000
 num_parents_mating = 600
 sol_per_pop = 1000
-keep_parents = 10
-mutation_percent_genes = 30
+keep_parents = 300
+parent_selection_type = "tournament"
+
+mutation_percent_genes = 40
+crossover_type = "two_points" # 
+mutation_type = "random"
+
 num_genes = len(dimensions)
 desired_output = distance
 init_range_low = min(cables_availability)
 init_range_high = max(cables_availability)
-parent_selection_type = "rank"
-crossover_type = "two_points"
-mutation_type = "random"
+
+
 
 
 ga_instance = pygad.GA(num_generations=num_generations,
@@ -125,6 +134,7 @@ ga_instance = pygad.GA(num_generations=num_generations,
                        crossover_type=crossover_type,
                        mutation_type=mutation_type,
                        callback_generation=callback_gen,
+                       on_parents=on_parents,
                        mutation_percent_genes=mutation_percent_genes)
 
 ga_instance.run()
