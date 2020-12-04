@@ -35,22 +35,22 @@ for filename in files:
     contents = f.read()
 
     for line in contents.split('\n'):
-      if 'solution:' in line:
+      if 'Parameters of the best solution:' in line:
         numbers = line.split('[')[1].split(']')[0].split(' ')
         current_solution = list(map(lambda x: int(x), numbers))
 
-      if 'covered_length:' in line:
-        current_covered_length = int(line.split(':')[1])
+      if 'Covered length:' in line:
+        current_covered_length = int(line.split(':')[1].split('Km')[0])
 
-      if 'nodes:' in line:
-        current_nodes = int(line.split('nodes: ')[1])
+      if 'Nodes of best solution:' in line:
+        current_nodes = int(line.split(':')[1])
 
   
   solution = {
     'nodes': current_nodes,
     'solution': current_solution,
     'length': current_covered_length,
-    'fileName': filename
+    'file_name': filename
   }
 
   solutions.append(solution)
@@ -79,7 +79,7 @@ if len(usable_solutions) > 0:
     if solution["nodes"] < min_nodes:
       best_solution = solution
 else:
-  print("No solution found. The saness...")
+  print("No solution found. The sadness...")
 
 if best_solution is not None:
   num_best_solutions = 0
@@ -90,9 +90,15 @@ if best_solution is not None:
     if sol_repr == best_repr:
       num_best_solutions += 1
 
-  print("Number of solutions: ", len(usable_solutions))
-  print("Percentage of acceptable solution to all: ", (len(usable_solutions) / len(solutions))*100, "%")
-  print("Percentage of best solution to all: ", num_best_solutions/len(solutions) * 100, "%")
-
-  print("Best solution")
-  print(best_solution)
+  print("\n\n")
+  print("Results:")
+  print(" - Number of runs: ", len(solutions))
+  print(" - Number of solutions: ", len(usable_solutions))
+  print(" - Percentage of acceptable solution to all: ", (len(usable_solutions) / len(solutions))*100, "%")
+  print(" - Percentage of best solution to all: ", num_best_solutions/len(solutions) * 100, "%")
+  print("")
+  print("Best solution: ")
+  print(" - Nodes: ", best_solution["nodes"])
+  print(" - Covered length: ", best_solution["length"], "Km")
+  print(" - Parameters: ", best_solution["solution"])
+  print(" - Filename: ", best_solution["file_name"])

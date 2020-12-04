@@ -4,6 +4,8 @@ default:
 run:
 	./.venv/bin/python3 ./src/main.py
 
+trace:
+	./.venv/bin/python3 ./src/main.py --trace
 
 par:
 	rm ./output/out*.txt
