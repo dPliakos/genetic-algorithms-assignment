@@ -3,7 +3,7 @@ import numpy
 import random
 
 def awesomeness():
-  for _ in range(80):
+  for _ in range(76):
     print("🦄", end="")
   print("")
 

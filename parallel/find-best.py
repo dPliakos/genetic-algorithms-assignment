@@ -78,10 +78,21 @@ if len(usable_solutions) > 0:
   for solution in usable_solutions:
     if solution["nodes"] < min_nodes:
       best_solution = solution
-
 else:
   print("No solution found. The saness...")
 
 if best_solution is not None:
+  num_best_solutions = 0
+  best_repr = str(best_solution["solution"])
+
+  for solution in solutions:
+    sol_repr = str(solution["solution"])
+    if sol_repr == best_repr:
+      num_best_solutions += 1
+
+  print("Number of solutions: ", len(usable_solutions))
+  print("Percentage of acceptable solution to all: ", (len(usable_solutions) / len(solutions))*100, "%")
+  print("Percentage of best solution to all: ", num_best_solutions/len(solutions) * 100, "%")
+
   print("Best solution")
   print(best_solution)
