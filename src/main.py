@@ -31,6 +31,12 @@ print("distance: ", distance)
 print("dimensions: ", dimensions)
 print("cables_availability: ", cables_availability)
 
+global consecutive_equivalent_solutions
+global current_best_solution
+global max_consecutive_equivalent_solutions
+consecutive_equivalent_solutions = 0
+max_consecutive_equivalent_solutions = 50
+current_best_solution = [] # placeholder
 
 # Init alg
 def get_current_length(index, nCables):
@@ -77,6 +83,19 @@ def callback_gen(ga_instance):
     nodes = nodes - 1
     print("Generation : ", ga_instance.generations_completed, " - Fitness:", f, " - sol: ", solution, " - Distance: ", covered_length, " - nodes:", nodes)
 
+    global consecutive_equivalent_solutions
+    global current_best_solution
+
+    solution_representation = str(solution)
+    if solution_representation == current_best_solution:
+        consecutive_equivalent_solutions += 1
+    else:
+        current_best_solution = solution_representation
+        consecutive_equivalent_solutions = 0
+
+    if consecutive_equivalent_solutions >= max_consecutive_equivalent_solutions:
+      return "stop"
+
 def on_parents(ga_instance, selected_parents):
     lala = []
     for parent in selected_parents:
@@ -85,8 +104,6 @@ def on_parents(ga_instance, selected_parents):
     all_par = set(lala)
     # print("parents: ", len(all_par), " - par: ", str(all_par))
     print("parent type: ", len(all_par), " - parents:", len(selected_parents), end=" - ")
-
-
 
 fitness_function = fitness_func
 
