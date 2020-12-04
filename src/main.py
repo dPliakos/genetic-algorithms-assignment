@@ -56,21 +56,8 @@ def fitness_func(solution, solution_idx):
     length_difference *= 10
     nodes = nodes - 1
     original_fitness = 1.0 / ((0.3*length_difference) + (0.6*quantity_violations) + (0.1*nodes))
+    return original_fitness
     
-
-    random.seed(str(original_fitness) + str(random.random()) + str(solution_idx) + "lala")
-    lolo = random.random()
-    if (lolo > 0.8):
-      lala = random.random()
-      random.seed(str(original_fitness) + str(solution_idx))
-      if (lala < 0.4):
-        # print("Kaboom!")
-        return original_fitness + lala
-      else:
-        return original_fitness  
-    else:
-      return original_fitness
-
 def callback_gen(ga_instance):
     sol = ga_instance.best_solution()
     f = sol[1]
