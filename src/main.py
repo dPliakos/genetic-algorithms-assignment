@@ -2,13 +2,17 @@ import pygad
 import numpy
 import random
 import sys
+import matplotlib.pyplot as plt
 
 # script options
 show_trace = False
+show_graph = False
 
 for option in sys.argv:
     if option == "-t" or option == "--trace":
         show_trace = True
+    if option == "-g" or option == "--graph":
+        show_graph = True
 
 # Global variables to be used in the library hooks
 global consecutive_equivalent_solutions
@@ -21,6 +25,9 @@ current_best_solution = []  # placeholder
 
 inputFile = "./in.txt"
 
+if show_graph:
+    plot_x = []
+    plot_y = []
 
 
 # Read data
@@ -107,6 +114,11 @@ def callback_gen(ga_instance):
         current_best_solution = solution_representation
         consecutive_equivalent_solutions = 0
 
+
+    if show_graph:
+        plot_x.append(ga_instance.generations_completed)
+        plot_y.append(f)
+
     if consecutive_equivalent_solutions >= max_consecutive_equivalent_solutions:
         return "stop"
 
@@ -173,7 +185,14 @@ for i in range(len(solution)):
 formula = " + ".join(formula_factors)
 nodes = number_of_cables - 1
 
-
+if show_graph:
+    plt.plot(plot_x, plot_y, label="Fitness of best solution")
+    plt.title('Model training')
+    plt.ylabel('Best fitness')
+    plt.xlabel('Generations')
+    plt.yticks([0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 1])
+    plt.legend(loc = 'best')
+    plt.show()
 
 
 # Show output

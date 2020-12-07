@@ -7,6 +7,9 @@ run:
 trace:
 	./.venv/bin/python3 ./src/main.py --trace
 
+graph:
+	./.venv/bin/python3 ./src/main.py --graph
+
 par:
 	rm ./output/out*.txt
 	time seq $N | parallel ./parallel/run_script.sh
