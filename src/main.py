@@ -132,7 +132,7 @@ def on_parents(ga_instance, selected_parents):
 
     global show_trace
     if show_trace:
-        print("parent type: ", len(all_par), " - parents:",
+        print("parent types: ", len(all_par), " - parents:",
             len(selected_parents), end=" - ")
 
 
@@ -143,13 +143,13 @@ num_parents_mating = 600
 sol_per_pop = 1000
 keep_parents = 300
 parent_selection_type = "tournament"
+k_tournament= 3
 
 mutation_percent_genes = 40
 crossover_type = "two_points"
 mutation_type = "random"
 
 num_genes = len(dimensions)
-desired_output = distance
 init_range_low = min(cables_availability)
 init_range_high = max(cables_availability)
 
@@ -163,6 +163,7 @@ ga_instance = pygad.GA(num_generations=num_generations,
                        init_range_low=init_range_low,
                        init_range_high=init_range_high,
                        parent_selection_type=parent_selection_type,
+                       K_tournament=k_tournament,
                        keep_parents=keep_parents,
                        crossover_type=crossover_type,
                        mutation_type=mutation_type,
