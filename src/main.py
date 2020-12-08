@@ -19,7 +19,7 @@ global consecutive_equivalent_solutions
 global current_best_solution
 global max_consecutive_equivalent_solutions
 consecutive_equivalent_solutions = 0
-max_consecutive_equivalent_solutions = 50
+max_consecutive_equivalent_solutions = 100
 current_best_solution = []  # placeholder
 
 
@@ -150,7 +150,7 @@ crossover_type = "two_points"
 mutation_type = "random"
 
 num_genes = len(dimensions)
-init_range_low = min(cables_availability)
+init_range_low = 0
 init_range_high = max(cables_availability)
 
 
