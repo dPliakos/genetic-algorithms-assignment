@@ -5,9 +5,9 @@ Required tools:
  
  - python3
  - make
+ - virualenv
  
 Optional:
- - virualenv
  - gnu-parallel (for parallel execution)
 
 
