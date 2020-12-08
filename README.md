@@ -5,7 +5,7 @@ Required tools:
  
  - python3
  - make
- - virualenv
+ - virtualenv
  
 Optional:
  - gnu-parallel (for parallel execution)
