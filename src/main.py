@@ -19,7 +19,7 @@ global consecutive_equivalent_solutions
 global current_best_solution
 global max_consecutive_equivalent_solutions
 consecutive_equivalent_solutions = 0
-max_consecutive_equivalent_solutions = 100
+max_consecutive_equivalent_solutions = 200
 current_best_solution = []  # placeholder
 
 
@@ -139,7 +139,7 @@ def on_parents(ga_instance, selected_parents):
 fitness_function = fitness_func
 
 num_generations = 12000
-num_parents_mating = 600
+num_parents_mating = 1000
 sol_per_pop = 1000
 keep_parents = 300
 parent_selection_type = "tournament"
